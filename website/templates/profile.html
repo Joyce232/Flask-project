@@ -42,9 +42,14 @@
             <div class="card w-80">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Comentário em
-                        <a href="{{url_for('views.read_post', id=comment.post.id)}}" style="color:#b18cd9;">
-                        {{ comment.post.title }}:</a></h4>
+                        <h4 class="card-title">Comentário em:
+                            {% if comment.post %}
+                             <a href="{{url_for('views.read_post', id=comment.post.id)}}" style="color:#b18cd9;">
+                            {{ comment.post.title }}:</a>
+                            {% else %}
+                            Post deletado
+                            {% endif %}
+                       </h4>
                     </div>
                     <div class="card-body">
                         <p class="card-text">{{ comment.message|safe }}</p>

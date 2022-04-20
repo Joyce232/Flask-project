@@ -65,6 +65,7 @@ def logout():
 def profile(id):
     profile_owner = User.query.get_or_404(id)
     profile_owner_posts = profile_owner.posts
-    return render_template("profile.html", user=current_user, profile_owner=profile_owner,
+    user = current_user
+    return render_template("profile.html", user=user, profile_owner=profile_owner,
                            profile_owner_posts=profile_owner_posts)
 

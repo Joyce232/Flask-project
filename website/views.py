@@ -66,30 +66,32 @@ def update_post(id):
 @login_required
 def delete_post(id):
     post = Post.query.get_or_404(id)
+    user = current_user
     try:
         db.session.delete(post)
         db.session.commit()
         flash('Post deletado com sucesso', category='success')
-        return redirect(url_for('auth.profile', id=current_user.id))
+        return redirect(url_for('auth.profile', id=user.id))
     except:
         flash('Opa! Algo deu errado...Tente novamente', category='error')
-        return redirect(url_for('auth.profile', id=current_user.id))
-    return render_template("delete-message.html", user=current_user)
+        return redirect(url_for('auth.profile', id=user.id))
+    return render_template("delete-message.html", user=user)
 
 
 @views.route("delete-comment/<int:id>")
 @login_required
 def delete_comment(id):
     comment = Comment.query.get_or_404(id)
+    user = current_user
     try:
         db.session.delete(comment)
         db.session.commit()
         flash('Comentário deletado com sucesso', category='success')
-        return redirect(url_for('auth.profile', id=current_user.id))
+        return redirect(url_for('auth.profile', id=user.id))
     except:
         flash('Opa! Algo deu errado...Tente novamente', category='error')
-        return redirect(url_for('auth.profile', id=current_user.id))
-    return render_template("delete-message.html", user=current_user)
+        return redirect(url_for('auth.profile', id=user.id))
+    return render_template("delete-message.html", user=user)
 
 
 @views.route("/search", methods=["POST"])
